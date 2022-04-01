@@ -1,24 +1,78 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Running a Python script</title>
-        <?PHP
-        echo shell_exec("ML_TEST.py");
-        ?>
-    </head>
-    <body>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+</head>
+<body>
+    <a href="index.htm">Return to index i did change this right?</a>
+    <script>
+    var config = {
+        type: Phaser.AUTO,
+        width: 8000,
+        height: 600,
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 500 }
+            }
+        },
+        scene: {
+            preload: preload,
+            create: create
+        }
+    };
 
-    <h1>My second Heading</h1>
+    var game = new Phaser.Game(config);
 
-    <p>My second paragraph.</p>
+    function preload ()
+    {
+        this.load.setBaseURL('http://labs.phaser.io');
 
-    <a href="index.htm">Location</a>
+        this.load.image('sky', 'assets/skies/space3.png');
+        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
+        this.load.image('red', 'assets/particles/red.png');
+    }
 
-    <!--
-    <a href="index.htm">
-        <img src="dream no more pfp.png" alt="img link test" style="width:42px;height:42px;">
-    </a>
-    -->
+    function create ()
+    {
+        let xPlacement = 400;
+        //let yPlacement = 300;
+        let i = 0
 
-    </body>
+        while(i < 10){
+            this.add.image(xPlacement, 300, `sky`)
+            xPlacement = xPlacement + 400;
+            print("x placement is at", xPlacement);
+            i++; 
+        }
+
+        /*
+        for(let i = 0; i > 10; i++){
+            this.add.image(xPlacement, 300, `sky`)
+            xPlacement = xPlacement + 400;
+            print("x placement is at", xPlacement);
+        } //i think i just cant write these to save my life today
+        */
+
+        //this.add.image(400, 300, 'sky');
+
+        var particles = this.add.particles('red');
+
+        var emitter = particles.createEmitter({
+            speed: 1000,
+            scale: { start: 10, end: 0 },
+            blendMode: 'ADD'
+        });
+
+        var logo = this.physics.add.image(400, 100, 'logo');
+
+        logo.setVelocity(100, 200);
+        logo.setBounce(1, 1);
+        logo.setCollideWorldBounds(true);
+
+        emitter.startFollow(logo);
+    }
+    </script>
+
+</body>
 </html>
