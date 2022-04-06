@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,74 +6,66 @@
 </head>
 <body>
     <a href="index.htm">Return to index i did change this right?</a>
-    <script>
-    var config = {
-        type: Phaser.AUTO,
-        width: 8000,
-        height: 600,
-        physics: {
-            default: 'arcade',
-            arcade: {
-                gravity: { y: 500 }
-            }
-        },
-        scene: {
-            preload: preload,
-            create: create
+    <script src="phaser_demo.js"></script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.15.1/dist/phaser-arcade-physics.min.js"></script>
+    <title>NBHome</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+        .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+        .fa-anchor,.fa-coffee {font-size:200px}
+        canvas {
+        display: block;
+        margin: 0 auto;
         }
-    };
+    </style>
+</head>
+<body>
 
-    var game = new Phaser.Game(config);
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-red w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="index.htm" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
+    <a href="game_page.htm" class="w3-bar-item w3-button w3-padding-large w3-white">Evolution Sim</a>
+  </div>
 
-    function preload ()
-    {
-        this.load.setBaseURL('http://labs.phaser.io');
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="index.htm" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="game_page.htm" class="w3-bar-item w3-button w3-padding-large">Evolution Sim</a>
+  </div>
+</div>
 
-        this.load.image('sky', 'assets/skies/space3.png');
-        this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-        this.load.image('red', 'assets/particles/red.png');
-    }
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:20px 16px">
+    <div style="object-position:center"></div>
+        <script src="phaser_demo.js"></script>
+    </div> 
+</header>
 
-    function create ()
-    {
-        let xPlacement = 400;
-        //let yPlacement = 300;
-        let i = 0
-
-        while(i < 10){
-            this.add.image(xPlacement, 300, `sky`)
-            xPlacement = xPlacement + 400;
-            //print("x placement is at", xPlacement);
-            i++; 
-        }
-
-        /*
-        for(let i = 0; i > 10; i++){
-            this.add.image(xPlacement, 300, `sky`)
-            xPlacement = xPlacement + 400;
-            print("x placement is at", xPlacement);
-        } //i think i just cant write these to save my life today
-        */
-
-        //this.add.image(400, 300, 'sky');
-
-        var particles = this.add.particles('red');
-
-        var emitter = particles.createEmitter({
-            speed: 1000,
-            scale: { start: 10, end: 0 },
-            blendMode: 'ADD'
-        });
-
-        var logo = this.physics.add.image(400, 100, 'logo');
-
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-
-        emitter.startFollow(logo);
-    }
-    </script>
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
 
 </body>
 </html>
