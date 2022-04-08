@@ -51,7 +51,7 @@ function create ()
     var particles = this.add.particles('red');
 
     var emitter = particles.createEmitter({
-        speed: 1000,
+        speed: 10000,
         scale: { start: 10, end: 0 },
         blendMode: 'ADD'
     });
