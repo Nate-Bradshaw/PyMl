@@ -10,4 +10,4 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
 
 #http://localhost:8080/
 
-#ctrl c in python terminal to shut the server down to update it.
+#ctrl c in python terminal to shut the server down
