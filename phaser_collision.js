@@ -23,28 +23,38 @@ var config = {
 var game = new Phaser.Game(config);
 var spacebar;
 var blockA;
+var blockB
+var colToggle = true;
+
+var cat1;
+var cat2;
+var cat3;
 
 function preload ()
 {
-    this.load.image('block', 'box.jpg');
+    this.load.image('block', 'scotts box as requested.jpg');
 }
 
 function create ()
 {
     blockA = this.matter.add.image(200, 300, 'block').setBounce(1.5).setFriction(0);
-    blockA.setScale(0.5);
+    blockA.setScale(0.15);
     blockA.setVelocityX(25);
-    var blockB = this.matter.add.image(400, 300, 'block');
+    blockB = this.matter.add.image(400, 300, 'block');
+    blockB.setScale(0.15);
 
     var blockC = this.matter.add.image(750, 300, 'block').setStatic(true);
+    blockC.setScale(0.15);
     var blockD = this.matter.add.image(50, 300, 'block').setStatic(true);
+    blockD.setScale(0.15);
 
     var cat1 = this.matter.world.nextCategory();
+    var cat2 = this.matter.world.nextCategory();
+    
+    var cat3 = this.matter.world.nextCategory();
 
     blockA.setCollisionCategory(cat1);
     blockC.setCollisionCategory(cat1);
-
-    var cat2 = this.matter.world.nextCategory();
 
     blockD.setCollisionCategory(cat2);
 
@@ -57,16 +67,30 @@ function create ()
 
         event.pairs[0].bodyA.gameObject.setTint(0xff0000);
         event.pairs[0].bodyB.gameObject.setTint(0x00ff00);
-        console.log("bonk");
+        //console.log("bonk");
 
     });
 }
 
 function update ()
 {
-    if (spacebar.isDown)
+
+
+    if (Phaser.Input.Keyboard.JustDown(spacebar))
     {
-        console.log("space bar pressed");
-        blockA.setVelocityX(100);
+        //console.log("space bar pressed");
+        blockA.setVelocityX(50);
+
+        if(colToggle){
+            blockB.setCollisionCategory(cat1);
+            colToggle = false;
+            console.log("collides");
+        }
+        else if(!colToggle){
+            blockB.setCollisionCategory(cat3);
+            colToggle = true;
+            console.log("nah");
+        }
+
     }
 }
