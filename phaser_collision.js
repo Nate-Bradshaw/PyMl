@@ -22,8 +22,8 @@ var config = {
 
 var game = new Phaser.Game(config);
 var spacebar;
-var blockA;
-var blockB
+var blockA; //moving block
+var blockB; //center block with no collision
 var colToggle = true;
 
 var cat1;
@@ -40,23 +40,23 @@ function create ()
     blockA = this.matter.add.image(200, 300, 'block').setBounce(1.5).setFriction(0);
     blockA.setScale(0.15);
     blockA.setVelocityX(25);
-    blockB = this.matter.add.image(400, 300, 'block');
+    blockB = this.matter.add.image(400, 300, 'block').setStatic(true);
     blockB.setScale(0.15);
 
-    var blockC = this.matter.add.image(750, 300, 'block').setStatic(true);
+    var blockC = this.matter.add.image(750, 300, 'block').setStatic(true); //right block
     blockC.setScale(0.15);
-    var blockD = this.matter.add.image(50, 300, 'block').setStatic(true);
+    var blockD = this.matter.add.image(50, 300, 'block').setStatic(true); //left block
     blockD.setScale(0.15);
 
-    var cat1 = this.matter.world.nextCategory();
-    var cat2 = this.matter.world.nextCategory();
-    
-    var cat3 = this.matter.world.nextCategory();
+    cat1 = this.matter.world.nextCategory();
+    cat2 = this.matter.world.nextCategory();
+    cat3 = this.matter.world.nextCategory();
 
-    blockA.setCollisionCategory(cat1);
+    //blockA.setCollisionCategory(cat1);
     blockC.setCollisionCategory(cat1);
+    blockD.setCollisionCategory(cat1);
 
-    blockD.setCollisionCategory(cat2);
+    blockB.setCollisionCategory(cat3);
 
     blockA.setCollidesWith([ cat1, cat2 ]);
     // blockA.setCollidesWith(cat1);
@@ -74,15 +74,13 @@ function create ()
 
 function update ()
 {
-
-
     if (Phaser.Input.Keyboard.JustDown(spacebar))
     {
-        //console.log("space bar pressed");
         blockA.setVelocityX(50);
 
+
         if(colToggle){
-            blockB.setCollisionCategory(cat1);
+            blockB.setCollisionCategory(cat2);
             colToggle = false;
             console.log("collides");
         }
@@ -91,6 +89,5 @@ function update ()
             colToggle = true;
             console.log("nah");
         }
-
     }
 }
