@@ -37,7 +37,7 @@ function create ()
     var stiffness = 0.1;
     var lastPosition = new Phaser.Math.Vector2();
     var options = { friction: 0.005, frictionAir: 0, restitution: 1 };
-    var pinOptions = { friction: 0, frictionAir: 0, restitution: 0, ignoreGravity: true, inertia: Infinity, isStatic: true };
+    var pinOptions = { friction: 0, frictionAir: 0, restitution: 0, ignoreGravity: true, inertia: Infinity, isStatic: false };
 
     var current = null;
     var previous = null;
@@ -63,6 +63,14 @@ function create ()
             {
                 lastPosition.x = x;
                 lastPosition.y = y;
+
+                /*
+                this.input
+                // .setTopOnly(false) // If you want to check if more than the top most hitbox was clicked
+                .on('pointerdown', (pointer: Phaser.Input.Pointer, objectsClicked: Phaser.GameObjects.GameObject[]) => {    
+                  console.log(objectsClicked)
+              });
+              */
 
                 current = this.matter.add.polygon(pointer.x, pointer.y, sides, size, pinOptions);
 
