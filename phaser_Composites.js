@@ -7,7 +7,7 @@ var config = {
     physics: {
         default: 'matter',
         matter: {
-            Composite: this.composite,
+            Composite: Phaser.Physics.Matter.MatterPhysics.Composite,
             gravity: {
                 x: 0,
                 y: 0
@@ -21,16 +21,18 @@ var config = {
     }
 };
 
+const { Composite } = require("matter");
+
 var game = new Phaser.Game(config);
 
-var Composite = this.composite;
+var MyComposite =  Composite.create;
 
 function preload(){
 
 }
 
 function create(){
-    Composite.add(world, [
+    MyComposite.add(world, [
         // walls
         Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
         Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
